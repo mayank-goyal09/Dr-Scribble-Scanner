@@ -2,7 +2,15 @@
 
 # 🩺 Dr. Scribble Scanner — Medical Handwriting OCR & ICD-9 Classifier
 
-### 🌐 **[Streamline Your Clinical Diagnostic Workflows](http://localhost:8501)**
+### 🌐 **[Experience the Live Web Application](https://dr-scribble-scanner-project.streamlit.app/)**
+
+<a href="https://dr-scribble-scanner-project.streamlit.app/" target="_blank">
+  <img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg" alt="Streamlit App" height="40">
+</a>
+
+<br/><br/>
+
+[![Live App](https://img.shields.io/badge/🚀_LIVE_APP-dr--scribble--scanner--project.streamlit.app-38bdf8?style=for-the-badge&logo=streamlit&logoColor=white)](https://dr-scribble-scanner-project.streamlit.app/)
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Outfit&weight=700&size=30&duration=3000&pause=1000&color=38bdf8&center=true&vCenter=true&width=900&height=50&lines=Parse+unstructured+clinical+notes...;Extract+text+via+Tesseract+OCR;XGBoost+%26+Logistic+Regression+inference;Predict+top+5+ICD-9+diagnostic+codes)](https://git.io/typing-svg)
 
