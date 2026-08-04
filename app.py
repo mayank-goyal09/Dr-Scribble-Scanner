@@ -19,53 +19,233 @@ st.markdown("""
 <style>
     /* Main body styling */
     .stApp {
-        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        background: linear-gradient(135deg, #0b0f19 0%, #0f172a 50%, #1e1b4b 100%);
         color: #f8fafc;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
     
     /* Header styles */
     .main-title {
         font-size: 2.8rem;
         font-weight: 800;
-        background: linear-gradient(90deg, #38bdf8 0%, #a855f7 100%);
+        background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #a855f7 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 0.2rem;
+        letter-spacing: -0.5px;
     }
     
     .subtitle {
         color: #94a3b8;
+        font-size: 1.05rem;
+        margin-bottom: 1.8rem;
+    }
+    
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #090d16 0%, #0f172a 60%, #1e1b4b 100%) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    .sidebar-card {
+        background: rgba(30, 41, 59, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 18px;
+        margin-bottom: 16px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+    }
+    
+    .sidebar-card:hover {
+        border-color: rgba(56, 189, 248, 0.3);
+        box-shadow: 0 6px 24px rgba(56, 189, 248, 0.12);
+    }
+    
+    .sidebar-header {
         font-size: 1.1rem;
-        margin-bottom: 2rem;
+        font-weight: 700;
+        color: #f8fafc;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .sidebar-text {
+        font-size: 0.88rem;
+        color: #94a3b8;
+        line-height: 1.55;
+    }
+    
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(34, 197, 94, 0.12);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #4ade80;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .status-dot {
+        width: 7px;
+        height: 7px;
+        background-color: #4ade80;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #4ade80;
+    }
+    
+    .stat-number {
+        font-size: 2.2rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #38bdf8 0%, #a855f7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+        margin: 4px 0;
+    }
+    
+    .ocr-pill {
+        display: inline-block;
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        color: #38bdf8;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-right: 4px;
+        margin-bottom: 4px;
     }
     
     /* Premium card container styling */
     .premium-card {
-        background: rgba(30, 41, 59, 0.7);
+        background: rgba(30, 41, 59, 0.55);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 16px;
         padding: 24px;
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(16px);
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         margin-bottom: 20px;
     }
     
+    /* Section Divider Tag */
+    .or-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #64748b;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 16px 0;
+    }
+    
+    .or-divider::before, .or-divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .or-divider span {
+        padding: 0 12px;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+    }
+    
+    /* Custom Streamlit Selectbox Styling */
+    div[data-testid="stSelectbox"] > label {
+        font-weight: 600 !important;
+        color: #38bdf8 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.2px;
+    }
+    
+    div[data-baseweb="select"] {
+        background-color: rgba(15, 23, 42, 0.8) !important;
+        border: 1px solid rgba(56, 189, 248, 0.3) !important;
+        border-radius: 10px !important;
+        color: #f8fafc !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    div[data-baseweb="select"]:hover {
+        border-color: #38bdf8 !important;
+        box-shadow: 0 0 16px rgba(56, 189, 248, 0.25) !important;
+    }
+    
+    /* Custom Streamlit File Uploader Styling */
+    div[data-testid="stFileUploader"] > label {
+        font-weight: 600 !important;
+        color: #c084fc !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.2px;
+    }
+    
+    section[data-testid="stFileUploadDropzone"] {
+        background: rgba(15, 23, 42, 0.6) !important;
+        border: 2px dashed rgba(192, 132, 252, 0.4) !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    section[data-testid="stFileUploadDropzone"]:hover {
+        border-color: #c084fc !important;
+        background: rgba(192, 132, 252, 0.08) !important;
+        box-shadow: 0 0 20px rgba(192, 132, 252, 0.2) !important;
+    }
+    
+    /* Custom Streamlit Textarea Styling */
+    div[data-testid="stTextArea"] > label {
+        font-weight: 600 !important;
+        color: #f8fafc !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.2px;
+    }
+    
+    div[data-testid="stTextArea"] textarea {
+        background-color: rgba(15, 23, 42, 0.85) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 12px !important;
+        color: #f1f5f9 !important;
+        font-family: 'Fira Code', 'Courier New', monospace !important;
+        font-size: 0.92rem !important;
+        line-height: 1.6 !important;
+        padding: 14px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    div[data-testid="stTextArea"] textarea:focus {
+        border-color: #38bdf8 !important;
+        box-shadow: 0 0 18px rgba(56, 189, 248, 0.3) !important;
+        background-color: rgba(15, 23, 42, 0.95) !important;
+    }
+    
     /* Diagnostic Result Cards */
     .result-card {
-        background: rgba(15, 23, 42, 0.6);
+        background: rgba(15, 23, 42, 0.65);
         border: 1px solid rgba(56, 189, 248, 0.2);
         border-left: 6px solid #38bdf8;
-        border-radius: 8px;
-        padding: 16px;
-        margin-bottom: 12px;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 14px;
+        backdrop-filter: blur(8px);
         transition: all 0.3s ease;
     }
     
     .result-card:hover {
         transform: translateY(-2px);
-        border-left-width: 10px;
-        box-shadow: 0 4px 20px 0 rgba(56, 189, 248, 0.15);
+        border-left-width: 8px;
+        border-color: rgba(56, 189, 248, 0.5);
+        box-shadow: 0 8px 24px 0 rgba(56, 189, 248, 0.18);
     }
     
     .result-code {
@@ -78,34 +258,40 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 600;
         color: #f1f5f9;
-        margin-top: 4px;
+        margin-top: 6px;
     }
     
     .result-desc {
         font-size: 0.9rem;
         color: #94a3b8;
-        margin-top: 4px;
+        margin-top: 6px;
+        line-height: 1.5;
     }
     
     /* Custom Progress Bar */
     .progress-bg {
         background-color: #334155;
-        border-radius: 4px;
+        border-radius: 6px;
         height: 8px;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 12px;
         overflow: hidden;
     }
     
     .progress-bar {
         background: linear-gradient(90deg, #38bdf8 0%, #a855f7 100%);
         height: 100%;
-        border-radius: 4px;
+        border-radius: 6px;
     }
     
-    /* Sidebar styling */
-    .css-1d391kg {
-        background-color: #0b0f19 !important;
+    .meta-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-top: 6px;
+        padding: 0 4px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -187,33 +373,61 @@ if model is None:
     st.info("The classifier needs to be trained first. Please execute the training script by running `python train.py` in your terminal. Once completed, this page will automatically load the model.")
     st.stop()
 
-# Sidebar Info
+# Redesigned Glassmorphism Sidebar
 with st.sidebar:
-    st.markdown("### About Dr. Scribble Scanner")
-    st.write("This app parses unstructured clinical notes and predicts the top ICD-9 diagnostic codes using an XGBoost Classifier trained on discharge summaries.")
+    st.markdown("""
+    <div class="sidebar-card">
+        <div class="sidebar-header">🩺 About Scanner</div>
+        <div class="sidebar-text">
+            Parses unstructured clinical notes and predicts the top <b>ICD-9 diagnostic codes</b> using an <b>XGBoost Classifier</b> trained on MIMIC discharge summaries.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    st.markdown("---")
-    st.markdown("### System Statistics")
+    st.markdown("""
+    <div class="sidebar-card">
+        <div class="sidebar-header">📊 System Statistics</div>
+        <div class="status-badge">
+            <span class="status-dot"></span> System Ready
+        </div>
+        <div class="sidebar-text" style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">ICD-9 Dictionary Size</div>
+    """, unsafe_allow_html=True)
+    
     if df_dict is not None:
-        st.metric(label="ICD-9 Dictionary size", value=f"{len(df_dict):,}")
+        st.markdown(f'<div class="stat-number">{len(df_dict):,}</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-text" style="font-size: 0.78rem;">Indexed medical diagnoses & terms</div>', unsafe_allow_html=True)
+        
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown("---")
-    st.markdown("### OCR Options")
-    st.info("Local OCR (Image Upload) requires the Tesseract-OCR binary installed on your OS. In its absence, you can use our sample presets or paste raw text below.")
+    st.markdown("""
+    <div class="sidebar-card">
+        <div class="sidebar-header">📷 OCR Engine & Modes</div>
+        <div style="margin-bottom: 10px;">
+            <span class="ocr-pill">Image Upload</span>
+            <span class="ocr-pill">Preset Notes</span>
+            <span class="ocr-pill">Manual Text</span>
+        </div>
+        <div class="sidebar-text">
+            Local OCR requires the <b>Tesseract-OCR</b> binary installed on your OS. In its absence, you can use our sample presets or paste raw text into the editor.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Split UI into two columns
 col_input, col_output = st.columns([1, 1], gap="large")
 
 with col_input:
     st.markdown('<div class="premium-card">', unsafe_allow_html=True)
-    st.markdown("### 📥 Input Clinical Note")
+    st.markdown("<h3 style='margin-bottom: 16px; color: #f8fafc;'>📥 Input Clinical Note</h3>", unsafe_allow_html=True)
     
     # Pre-defined sample dropdown
-    selected_sample = st.selectbox("Load Sample Presets:", list(SAMPLES.keys()))
+    selected_sample = st.selectbox("💡 Step 1: Select Sample Preset Note", list(SAMPLES.keys()))
     preset_text = SAMPLES[selected_sample]
     
+    st.markdown('<div class="or-divider"><span>OR UPLOAD IMAGE</span></div>', unsafe_allow_html=True)
+    
     # File uploader (OCR demonstration)
-    uploaded_image = st.file_uploader("Or Upload Doctor's Handwriting Image:", type=["png", "jpg", "jpeg"])
+    uploaded_image = st.file_uploader("🖼️ Step 2: Upload Doctor's Handwriting Image", type=["png", "jpg", "jpeg"])
     
     # OCR fallback handling
     if uploaded_image is not None:
@@ -221,14 +435,12 @@ with col_input:
             import pytesseract
             from PIL import Image
             img = Image.open(uploaded_image)
-            # Try to run OCR
             with st.spinner("Extracting text from image via OCR..."):
                 ocr_text = pytesseract.image_to_string(img)
-            st.success("Text successfully extracted via OCR!")
+            st.success("✨ Text successfully extracted via OCR!")
             preset_text = ocr_text
         except ImportError:
-            st.warning("⚠️ **Pytesseract library not installed.** Showing simulation output instead. To use live image OCR, install `pytesseract` and Tesseract OCR engine.")
-            # Auto-select Sample 1 for demo purposes
+            st.warning("⚠️ **Pytesseract library not installed.** Displaying sample clinical transcript instead. Install `pytesseract` for live OCR.")
             if not preset_text:
                 preset_text = SAMPLES["Sample 1: Cardiovascular Disease & Hypertension"]
         except Exception as e:
@@ -236,28 +448,40 @@ with col_input:
             if not preset_text:
                 preset_text = SAMPLES["Sample 1: Cardiovascular Disease & Hypertension"]
                 
+    st.markdown('<div class="or-divider"><span>EDIT & PARSE</span></div>', unsafe_allow_html=True)
+    
     # Text input area
     medical_text = st.text_area(
-        "Edit or Paste Medical Text below:",
+        "📝 Step 3: Medical Text Editor (Real-Time Parsing)",
         value=preset_text,
-        height=250,
+        height=220,
         placeholder="Enter patient discharge summaries, physician notes, or diagnostic reviews here..."
     )
+    
+    # Character / Word count display bar
+    char_count = len(medical_text)
+    word_count = len(medical_text.split()) if medical_text.strip() else 0
+    st.markdown(f"""
+    <div class="meta-bar">
+        <span><b>Words:</b> {word_count:,} | <b>Chars:</b> {char_count:,}</span>
+        <span>⚡ Auto-classifying</span>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col_output:
     st.markdown('<div class="premium-card">', unsafe_allow_html=True)
-    st.markdown("### 📋 Classification Results")
+    st.markdown("<h3 style='margin-bottom: 16px; color: #f8fafc;'>📋 Classification Results</h3>", unsafe_allow_html=True)
     
     if medical_text.strip() == "":
-        st.write("Results will appear here in real-time once you paste some medical notes or select a sample preset on the left.")
+        st.info("💡 **Ready for input.** Select a sample preset on the left or paste doctor notes to view predicted ICD-9 diagnostic codes in real-time.")
     else:
         # Preprocess text
         cleaned = clean_medical_text(medical_text)
         
         # Display clean preview
-        with st.expander("Show preprocessed text (normalized for ML)"):
+        with st.expander("🔍 View Preprocessed Normalized Text (ML Feature Input)"):
             st.code(cleaned, language="text")
             
         if cleaned == "":
@@ -279,11 +503,10 @@ with col_output:
                 top_icd_codes = encoder.inverse_transform(top_encoded_classes)
                 
                 # Output Results
-                st.markdown("#### Top Predicted ICD-9 Diagnoses:")
+                st.markdown("<h4 style='color: #94a3b8; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px;'>Top Predicted ICD-9 Diagnoses</h4>", unsafe_allow_html=True)
                 
                 for idx, (code, prob) in enumerate(zip(top_icd_codes, top_probs)):
                     # Format lookup code to match MIMIC ICD9 database formatting
-                    # (e.g. converting 4019 to 401.9, 25000 to 250.00, etc.)
                     formatted_code = str(code).strip()
                     
                     # Try to fetch description
@@ -309,12 +532,12 @@ with col_output:
                     <div class="result-card">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span class="result-code">ICD-9: {code}</span>
-                            <span style="font-weight: 700; color: #a855f7;">{confidence_percent:.1f}% Confidence</span>
+                            <span style="font-weight: 700; color: #a855f7; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 10px; border-radius: 20px; font-size: 0.85rem;">{confidence_percent:.1f}% Confidence</span>
                         </div>
                         <div class="result-title">{short_title}</div>
                         <div class="result-desc"><b>Details:</b> {long_title}</div>
-                        <div style="margin-top: 8px; font-size: 0.85rem;">
-                            <a href="https://www.icd9data.com/getICD9Code.ashx?icd9={code}" target="_blank" style="color: #38bdf8; text-decoration: none;">🔍 Reference Lookup →</a>
+                        <div style="margin-top: 10px; font-size: 0.85rem;">
+                            <a href="https://www.icd9data.com/getICD9Code.ashx?icd9={code}" target="_blank" style="color: #38bdf8; text-decoration: none; font-weight: 600;">🔍 Reference Lookup →</a>
                         </div>
                         <div class="progress-bg">
                             <div class="progress-bar" style="width: {confidence_percent}%;"></div>
@@ -323,3 +546,4 @@ with col_output:
                     """, unsafe_allow_html=True)
                     
     st.markdown('</div>', unsafe_allow_html=True)
+
