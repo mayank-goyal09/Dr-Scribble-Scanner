@@ -195,6 +195,21 @@ Open your browser to start scanning clinical notes:
 
 ---
 
+## 🛡️ **CLINICAL GOVERNANCE & RISK MITIGATION**
+
+To ensure reliable clinical decision support (CDS) and prevent downstream errors from noisy handwriting scans, this architecture incorporates critical guardrails:
+
+```
+[Raw Handwriting Image] ➡️ [Tesseract OCR Extraction] ➡️ [Clinical Text Normalization & Regex Sanitization] ➡️ [Confidence-Calibrated ML Inference]
+```
+
+* **Polarity & Negation Preservation:** Preprocessing filters protect clinical negations (e.g., *"denies"*, *"no history of"*) from token fragmentation to avoid inverted diagnostic flags.
+* **Lexical Disambiguation:** Normalization helps prevent phonetic and character-level confusion between look-alike/sound-alike clinical entities.
+* **Top-5 Probabilistic Transparency:** Rather than returning an opaque single-label prediction, the HUD outputs a calibrated top-5 probability distribution with progress indicators for clinical review.
+* **Traceable Dictionary Mapping:** Every predicted code links directly to standardized `D_ICD_DIAGNOSES` taxonomy definitions for instant human-in-the-loop verification.
+
+---
+
 ## 👨‍💻 **CONNECT WITH ME**
 
 <div align="center">
